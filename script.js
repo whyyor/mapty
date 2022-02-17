@@ -95,9 +95,34 @@ class App {
         inputCadence.closest('.form__row').classList.toggle('form__row--hidden')
     }
     _newWorkout(e) {
+        const validInputs = (...inputs) => inputs.every(inp => Number.isFinite(inp));
+
         e.preventDefault();
 
-        // Clear input fields
+        //get data from the form
+        const type = inputType.value;
+        const distance = +inputDistance.value;
+        const duration = +inputDuration.value;
+
+        //if workout running, then create running object
+        if(type==='running'){
+            const cadence = +inputCadence.value
+            //check if data is valid
+            if(!validInputs(distance,duration,cadence)) return alert('Inputs have to be positive numbers!');
+        }
+
+        //if workout is cyclying, then create cycling object
+        if(type==='cycling'){
+            const Elevation = +inputElevation.value
+             //check if data is valid
+            if(!validInputs(distance,duration,cadence)) return alert('Inputs have to be positive numbers!');
+        }
+
+        //render workout map as marker
+
+        //render new workout on list
+
+        //hide the form and clear input fields
         inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
 
         // Display the marker
